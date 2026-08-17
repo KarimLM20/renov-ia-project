@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Header } from "@/components/renov/Header";
 import { Footer } from "@/components/renov/Footer";
 import { Hero } from "@/components/renov/Hero";
+import { HowItWorks } from "@/components/renov/HowItWorks";
 import { UploadZone } from "@/components/renov/UploadZone";
 import { PhotoPreview } from "@/components/renov/PhotoPreview";
 import { RoomSelector } from "@/components/renov/RoomSelector";
@@ -72,7 +73,10 @@ function Index() {
 
       <main className="flex-1">
         {flow.step === "home" && (
-          <Hero onImport={() => flow.setStep("upload")} onCapture={() => flow.setStep("upload")} />
+          <>
+            <Hero onImport={() => flow.setStep("upload")} onCapture={() => flow.setStep("upload")} />
+            <HowItWorks />
+          </>
         )}
 
         <div ref={workspaceRef} className="scroll-mt-20">
