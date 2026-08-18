@@ -26,7 +26,7 @@ export const Route = createFileRoute("/")({
 /** Écran d'accueil — intégration fidèle de la maquette Stitch. */
 function HomePage() {
   return (
-    <div className="bg-surface-m3 text-on-background-m3 min-h-screen pb-[100px] pt-16 md:pb-0 md:pt-0">
+    <div className="bg-surface-m3 text-on-background-m3 font-body min-h-screen pb-[100px] pt-16 md:pb-0 md:pt-0">
       <TopAppBar />
       <main className="mx-auto w-full max-w-[1440px] overflow-hidden">
         <HeroSection />
