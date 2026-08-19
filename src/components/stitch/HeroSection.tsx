@@ -28,14 +28,14 @@ export function HeroSection() {
 
         <div className="mt-6 flex w-full flex-col gap-4 sm:w-auto sm:flex-row">
           <Link
-            to="/upload"
+            to="/piece"
             className="bg-primary-m3 text-on-primary-m3 font-body text-label-md flex h-14 items-center justify-center gap-2 rounded-full px-8 shadow-[0px_8px_20px_rgba(137,76,50,0.2)] transition-all hover:opacity-90 active:scale-95"
           >
             <MaterialIcon name="photo_camera" />
             Prendre une photo
           </Link>
           <Link
-            to="/upload"
+            to="/piece"
             className="bg-surface-container-lowest border-outline-variant text-on-surface-m3 font-body text-label-md hover:bg-surface-variant flex h-14 items-center justify-center gap-2 rounded-full border px-8 transition-all active:scale-95"
           >
             <MaterialIcon name="upload" />

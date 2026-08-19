@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PieceRouteImport } from './routes/piece'
 import { Route as UploadRouteImport } from './routes/upload'
 import { Route as ApiGenerateImageRouteImport } from './routes/api/generate-image'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PieceRoute = PieceRouteImport.update({
+  id: '/piece',
+  path: '/piece',
   getParentRoute: () => rootRouteImport,
 } as any)
 const UploadRoute = UploadRouteImport.update({
@@ -31,30 +37,34 @@ const ApiGenerateImageRoute = ApiGenerateImageRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/piece': typeof PieceRoute
   '/upload': typeof UploadRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/piece': typeof PieceRoute
   '/upload': typeof UploadRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/piece': typeof PieceRoute
   '/upload': typeof UploadRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/upload' | '/api/generate-image'
+  fullPaths: '/' | '/piece' | '/upload' | '/api/generate-image'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/upload' | '/api/generate-image'
-  id: '__root__' | '/' | '/upload' | '/api/generate-image'
+  to: '/' | '/piece' | '/upload' | '/api/generate-image'
+  id: '__root__' | '/' | '/piece' | '/upload' | '/api/generate-image'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PieceRoute: typeof PieceRoute
   UploadRoute: typeof UploadRoute
   ApiGenerateImageRoute: typeof ApiGenerateImageRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/piece': {
+      id: '/piece'
+      path: '/piece'
+      fullPath: '/piece'
+      preLoaderRoute: typeof PieceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/upload': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PieceRoute: PieceRoute,
   UploadRoute: UploadRoute,
   ApiGenerateImageRoute: ApiGenerateImageRoute,
 }
