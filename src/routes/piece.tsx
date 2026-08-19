@@ -31,7 +31,7 @@ function RoomChoicePage() {
 
   const handleSelect = (id: string) => {
     setSelected(id);
-    void navigate({ to: "/upload" });
+    void navigate({ to: "/style" });
   };
 
   return (
