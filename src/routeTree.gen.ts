@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PieceRouteImport } from './routes/piece'
+import { Route as StyleRouteImport } from './routes/style'
 import { Route as UploadRouteImport } from './routes/upload'
 import { Route as ApiGenerateImageRouteImport } from './routes/api/generate-image'
 
@@ -22,6 +23,11 @@ const IndexRoute = IndexRouteImport.update({
 const PieceRoute = PieceRouteImport.update({
   id: '/piece',
   path: '/piece',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StyleRoute = StyleRouteImport.update({
+  id: '/style',
+  path: '/style',
   getParentRoute: () => rootRouteImport,
 } as any)
 const UploadRoute = UploadRouteImport.update({
@@ -38,12 +44,14 @@ const ApiGenerateImageRoute = ApiGenerateImageRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/piece': typeof PieceRoute
+  '/style': typeof StyleRoute
   '/upload': typeof UploadRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/piece': typeof PieceRoute
+  '/style': typeof StyleRoute
   '/upload': typeof UploadRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
 }
@@ -51,20 +59,22 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/piece': typeof PieceRoute
+  '/style': typeof StyleRoute
   '/upload': typeof UploadRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/piece' | '/upload' | '/api/generate-image'
+  fullPaths: '/' | '/piece' | '/style' | '/upload' | '/api/generate-image'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/piece' | '/upload' | '/api/generate-image'
-  id: '__root__' | '/' | '/piece' | '/upload' | '/api/generate-image'
+  to: '/' | '/piece' | '/style' | '/upload' | '/api/generate-image'
+  id: '__root__' | '/' | '/piece' | '/style' | '/upload' | '/api/generate-image'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PieceRoute: typeof PieceRoute
+  StyleRoute: typeof StyleRoute
   UploadRoute: typeof UploadRoute
   ApiGenerateImageRoute: typeof ApiGenerateImageRoute
 }
@@ -83,6 +93,13 @@ declare module '@tanstack/react-router' {
       path: '/piece'
       fullPath: '/piece'
       preLoaderRoute: typeof PieceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/style': {
+      id: '/style'
+      path: '/style'
+      fullPath: '/style'
+      preLoaderRoute: typeof StyleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/upload': {
@@ -105,6 +122,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PieceRoute: PieceRoute,
+  StyleRoute: StyleRoute,
   UploadRoute: UploadRoute,
   ApiGenerateImageRoute: ApiGenerateImageRoute,
 }
