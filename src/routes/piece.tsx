@@ -31,7 +31,7 @@ function RoomChoicePage() {
 
   const handleSelect = (id: string) => {
     setSelected(id);
-    void navigate({ to: "/upload", search: { room: id } as never });
+    void navigate({ to: "/upload" });
   };
 
   return (
