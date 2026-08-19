@@ -30,9 +30,11 @@ export function StyleCard({ style, selected, disabled = false, onToggle }: Style
         loading="lazy"
         className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 flex flex-col items-start p-4 text-left">
-        <span className="font-headline text-headline-md font-medium text-white">{style.name}</span>
+        <span className="font-headline text-[20px] font-medium leading-tight text-white md:text-headline-md">
+          {style.name}
+        </span>
         <span className="font-body text-label-sm text-white/80">{style.description}</span>
       </div>
       <span
