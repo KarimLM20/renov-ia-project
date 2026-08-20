@@ -14,6 +14,7 @@ import { Route as PieceRouteImport } from './routes/piece'
 import { Route as StyleRouteImport } from './routes/style'
 import { Route as UploadRouteImport } from './routes/upload'
 import { Route as ApiGenerateImageRouteImport } from './routes/api/generate-image'
+import { Route as InspirationIdRouteImport } from './routes/inspiration.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +41,11 @@ const ApiGenerateImageRoute = ApiGenerateImageRouteImport.update({
   path: '/api/generate-image',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InspirationIdRoute = InspirationIdRouteImport.update({
+  id: '/inspiration/$id',
+  path: '/inspiration/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/style': typeof StyleRoute
   '/upload': typeof UploadRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
+  '/inspiration/$id': typeof InspirationIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/style': typeof StyleRoute
   '/upload': typeof UploadRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
+  '/inspiration/$id': typeof InspirationIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +70,33 @@ export interface FileRoutesById {
   '/style': typeof StyleRoute
   '/upload': typeof UploadRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
+  '/inspiration/$id': typeof InspirationIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/piece' | '/style' | '/upload' | '/api/generate-image'
+  fullPaths:
+    | '/'
+    | '/piece'
+    | '/style'
+    | '/upload'
+    | '/api/generate-image'
+    | '/inspiration/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/piece' | '/style' | '/upload' | '/api/generate-image'
-  id: '__root__' | '/' | '/piece' | '/style' | '/upload' | '/api/generate-image'
+  to:
+    | '/'
+    | '/piece'
+    | '/style'
+    | '/upload'
+    | '/api/generate-image'
+    | '/inspiration/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/piece'
+    | '/style'
+    | '/upload'
+    | '/api/generate-image'
+    | '/inspiration/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +105,7 @@ export interface RootRouteChildren {
   StyleRoute: typeof StyleRoute
   UploadRoute: typeof UploadRoute
   ApiGenerateImageRoute: typeof ApiGenerateImageRoute
+  InspirationIdRoute: typeof InspirationIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -116,6 +145,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiGenerateImageRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/inspiration/$id': {
+      id: '/inspiration/$id'
+      path: '/inspiration/$id'
+      fullPath: '/inspiration/$id'
+      preLoaderRoute: typeof InspirationIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -125,6 +161,7 @@ const rootRouteChildren: RootRouteChildren = {
   StyleRoute: StyleRoute,
   UploadRoute: UploadRoute,
   ApiGenerateImageRoute: ApiGenerateImageRoute,
+  InspirationIdRoute: InspirationIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
