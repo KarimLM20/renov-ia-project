@@ -1,3 +1,5 @@
+import { Link } from "@tanstack/react-router";
+
 import { MaterialIcon } from "./MaterialIcon";
 import type { Inspiration } from "@/data/inspirations";
 
@@ -34,13 +36,14 @@ export function InspirationCard({ inspiration }: { inspiration: Inspiration }) {
           <h4 className="font-headline text-headline-md text-on-background-m3">{inspiration.title}</h4>
           <p className="font-body text-body-md text-on-surface-variant">{inspiration.subtitle}</p>
         </div>
-        <button
-          type="button"
+        <Link
+          to="/inspiration/$id"
+          params={{ id: inspiration.id }}
           aria-label={`Voir ${inspiration.title}`}
           className="bg-surface-container-low hover:bg-tertiary-fixed text-tertiary-m3 flex size-12 items-center justify-center rounded-full transition-colors"
         >
           <MaterialIcon name="arrow_forward" />
-        </button>
+        </Link>
       </div>
     </article>
   );
