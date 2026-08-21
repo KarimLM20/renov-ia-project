@@ -54,29 +54,28 @@ export function LoadingScreen() {
       precision highp float;
       varying vec2 v_texCoord;
       uniform float u_time;
-      uniform vec2 u_resolution;
 
       void main() {
         vec2 uv = v_texCoord;
-        float time = u_time * 0.6;
+        float time = u_time * 0.5;
 
         vec3 offWhite = vec3(0.98, 0.97, 0.96);
         vec3 sage = vec3(0.56, 0.62, 0.51);
         vec3 terracotta = vec3(0.74, 0.45, 0.33);
         vec3 sand = vec3(0.91, 0.84, 0.76);
 
-        float n1 = sin(uv.x * 3.2 + time) * cos(uv.y * 2.4 - time) * 0.5 + 0.5;
-        float n2 = sin(uv.y * 4.2 - time * 0.9) * cos(uv.x * 2.8 + time * 0.6) * 0.5 + 0.5;
-        float n3 = sin((uv.x + uv.y) * 2.5 + time * 1.2) * 0.5 + 0.5;
+        float n1 = sin(uv.x * 2.0 + time) * cos(uv.y * 1.5 - time) * 0.5 + 0.5;
+        float n2 = sin(uv.y * 2.5 - time * 0.7) * cos(uv.x * 2.0 + time * 0.6) * 0.5 + 0.5;
+        float n3 = sin((uv.x + uv.y) * 1.5 + time * 1.1) * 0.5 + 0.5;
 
-        vec3 color = mix(offWhite, sage, n1 * 0.55);
-        color = mix(color, terracotta, n2 * 0.4);
-        color = mix(color, sand, n3 * 0.25);
+        vec3 color = mix(offWhite, sage, n1 * 0.6);
+        color = mix(color, terracotta, n2 * 0.45);
+        color = mix(color, sand, n3 * 0.2);
 
         float dist = distance(uv, vec2(0.5));
-        float pulse = sin(u_time * 2.2) * 0.06 + 0.94;
-        float vignette = smoothstep(0.55 * pulse, 0.15, dist);
-        color = mix(color, offWhite, 1.0 - vignette);
+        float pulse = sin(u_time * 1.5) * 0.05 + 0.95;
+        float fade = smoothstep(0.6 * pulse, 0.2, dist);
+        color = mix(offWhite, color, fade);
 
         gl_FragColor = vec4(color, 1.0);
       }
