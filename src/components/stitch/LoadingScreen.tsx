@@ -161,7 +161,7 @@ export function LoadingScreen() {
 
   return (
     <div className="flex min-h-[60vh] w-full flex-col items-center justify-center px-margin-mobile text-center">
-      <div className="relative mb-12 flex h-64 w-64 items-center justify-center overflow-hidden rounded-xl bg-surface-m3/50 shadow-[0px_10px_40px_rgba(0,0,0,0.04)] backdrop-blur-md md:h-80 md:w-80">
+      <div className="relative mb-12 flex h-64 w-64 items-center justify-center overflow-hidden rounded-xl bg-surface-m3 shadow-[0px_10px_40px_rgba(0,0,0,0.04)] md:h-80 md:w-80">
         <canvas
           ref={canvasRef}
           aria-hidden="true"
