@@ -58,23 +58,27 @@ export function LoadingScreen() {
 
       void main() {
         vec2 uv = v_texCoord;
-        float time = u_time * 0.5;
+        float time = u_time * 0.6;
 
-        vec3 color1 = vec3(0.98, 0.97, 0.96); // Off-white
-        vec3 color2 = vec3(0.56, 0.61, 0.53); // Sage Green
-        vec3 color3 = vec3(0.68, 0.42, 0.31); // Terracotta
+        vec3 offWhite = vec3(0.98, 0.97, 0.96);
+        vec3 sage = vec3(0.56, 0.62, 0.51);
+        vec3 terracotta = vec3(0.74, 0.45, 0.33);
+        vec3 sand = vec3(0.91, 0.84, 0.76);
 
-        float noise = sin(uv.x * 3.0 + time) * cos(uv.y * 2.0 - time) * 0.5 + 0.5;
-        float noise2 = sin(uv.y * 4.0 - time * 0.8) * cos(uv.x * 3.0 + time * 0.5) * 0.5 + 0.5;
+        float n1 = sin(uv.x * 3.2 + time) * cos(uv.y * 2.4 - time) * 0.5 + 0.5;
+        float n2 = sin(uv.y * 4.2 - time * 0.9) * cos(uv.x * 2.8 + time * 0.6) * 0.5 + 0.5;
+        float n3 = sin((uv.x + uv.y) * 2.5 + time * 1.2) * 0.5 + 0.5;
 
-        vec3 finalColor = mix(color1, color2, noise);
-        finalColor = mix(finalColor, color3, noise2 * 0.3);
+        vec3 color = mix(offWhite, sage, n1 * 0.55);
+        color = mix(color, terracotta, n2 * 0.4);
+        color = mix(color, sand, n3 * 0.25);
 
         float dist = distance(uv, vec2(0.5));
-        float pulse = sin(u_time * 2.0) * 0.05 + 0.95;
-        float mask = smoothstep(0.4 * pulse, 0.35 * pulse, dist);
+        float pulse = sin(u_time * 2.2) * 0.06 + 0.94;
+        float vignette = smoothstep(0.55 * pulse, 0.15, dist);
+        color = mix(color, offWhite, 1.0 - vignette);
 
-        gl_FragColor = vec4(finalColor, 0.1 + mask * 0.2);
+        gl_FragColor = vec4(color, 1.0);
       }
     `;
 
