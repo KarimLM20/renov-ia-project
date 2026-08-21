@@ -12,7 +12,7 @@ import { UploadZone } from "@/components/renov/UploadZone";
 import { PhotoPreview } from "@/components/renov/PhotoPreview";
 import { RoomSelector } from "@/components/renov/RoomSelector";
 import { StyleSelector } from "@/components/renov/StyleSelector";
-import { LoadingScreen } from "@/components/renov/LoadingScreen";
+import { LoadingScreen } from "@/components/stitch/LoadingScreen";
 import { BeforeAfterSlider } from "@/components/renov/BeforeAfterSlider";
 import { ResultActions } from "@/components/renov/ResultActions";
 import { StepIndicator } from "@/components/renov/StepIndicator";
