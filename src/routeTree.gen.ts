@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as InspirationsRouteImport } from './routes/inspirations'
 import { Route as PieceRouteImport } from './routes/piece'
 import { Route as StyleRouteImport } from './routes/style'
 import { Route as UploadRouteImport } from './routes/upload'
@@ -19,6 +20,11 @@ import { Route as InspirationIdRouteImport } from './routes/inspiration.$id'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InspirationsRoute = InspirationsRouteImport.update({
+  id: '/inspirations',
+  path: '/inspirations',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PieceRoute = PieceRouteImport.update({
@@ -49,6 +55,7 @@ const InspirationIdRoute = InspirationIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/inspirations': typeof InspirationsRoute
   '/piece': typeof PieceRoute
   '/style': typeof StyleRoute
   '/upload': typeof UploadRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/inspirations': typeof InspirationsRoute
   '/piece': typeof PieceRoute
   '/style': typeof StyleRoute
   '/upload': typeof UploadRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/inspirations': typeof InspirationsRoute
   '/piece': typeof PieceRoute
   '/style': typeof StyleRoute
   '/upload': typeof UploadRoute
@@ -76,6 +85,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/inspirations'
     | '/piece'
     | '/style'
     | '/upload'
@@ -84,6 +94,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/inspirations'
     | '/piece'
     | '/style'
     | '/upload'
@@ -92,6 +103,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/inspirations'
     | '/piece'
     | '/style'
     | '/upload'
@@ -101,6 +113,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  InspirationsRoute: typeof InspirationsRoute
   PieceRoute: typeof PieceRoute
   StyleRoute: typeof StyleRoute
   UploadRoute: typeof UploadRoute
@@ -115,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inspirations': {
+      id: '/inspirations'
+      path: '/inspirations'
+      fullPath: '/inspirations'
+      preLoaderRoute: typeof InspirationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/piece': {
@@ -157,6 +177,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  InspirationsRoute: InspirationsRoute,
   PieceRoute: PieceRoute,
   StyleRoute: StyleRoute,
   UploadRoute: UploadRoute,

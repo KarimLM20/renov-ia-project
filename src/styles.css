@@ -294,6 +294,26 @@
   --text-label-sm--font-weight: 600;
 }
 
+@utility masonry-grid {
+  column-count: 2;
+  column-gap: 16px;
+  @media (min-width: 768px) {
+    column-count: 3;
+    column-gap: 24px;
+  }
+  @media (min-width: 1024px) {
+    column-count: 4;
+  }
+}
+
+@utility masonry-item {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  @media (min-width: 768px) {
+    margin-bottom: 24px;
+  }
+}
+
 @utility no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
