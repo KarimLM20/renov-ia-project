@@ -123,7 +123,7 @@ function InspirationsGalleryPage() {
         )}
       </main>
 
-      <BottomNavigation />
+      <BottomNavigation active="Inspirations" />
     </div>
   );
 }
