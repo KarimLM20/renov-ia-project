@@ -12,10 +12,12 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as InspirationsRouteImport } from './routes/inspirations'
 import { Route as PieceRouteImport } from './routes/piece'
+import { Route as RenovationsRouteImport } from './routes/renovations'
 import { Route as StyleRouteImport } from './routes/style'
 import { Route as UploadRouteImport } from './routes/upload'
 import { Route as ApiGenerateImageRouteImport } from './routes/api/generate-image'
 import { Route as InspirationIdRouteImport } from './routes/inspiration.$id'
+import { Route as RenovationIdRouteImport } from './routes/renovation.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -30,6 +32,11 @@ const InspirationsRoute = InspirationsRouteImport.update({
 const PieceRoute = PieceRouteImport.update({
   id: '/piece',
   path: '/piece',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RenovationsRoute = RenovationsRouteImport.update({
+  id: '/renovations',
+  path: '/renovations',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StyleRoute = StyleRouteImport.update({
@@ -52,34 +59,45 @@ const InspirationIdRoute = InspirationIdRouteImport.update({
   path: '/inspiration/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RenovationIdRoute = RenovationIdRouteImport.update({
+  id: '/renovation/$id',
+  path: '/renovation/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/inspirations': typeof InspirationsRoute
   '/piece': typeof PieceRoute
+  '/renovations': typeof RenovationsRoute
   '/style': typeof StyleRoute
   '/upload': typeof UploadRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
   '/inspiration/$id': typeof InspirationIdRoute
+  '/renovation/$id': typeof RenovationIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/inspirations': typeof InspirationsRoute
   '/piece': typeof PieceRoute
+  '/renovations': typeof RenovationsRoute
   '/style': typeof StyleRoute
   '/upload': typeof UploadRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
   '/inspiration/$id': typeof InspirationIdRoute
+  '/renovation/$id': typeof RenovationIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/inspirations': typeof InspirationsRoute
   '/piece': typeof PieceRoute
+  '/renovations': typeof RenovationsRoute
   '/style': typeof StyleRoute
   '/upload': typeof UploadRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
   '/inspiration/$id': typeof InspirationIdRoute
+  '/renovation/$id': typeof RenovationIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -87,38 +105,46 @@ export interface FileRouteTypes {
     | '/'
     | '/inspirations'
     | '/piece'
+    | '/renovations'
     | '/style'
     | '/upload'
     | '/api/generate-image'
     | '/inspiration/$id'
+    | '/renovation/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/inspirations'
     | '/piece'
+    | '/renovations'
     | '/style'
     | '/upload'
     | '/api/generate-image'
     | '/inspiration/$id'
+    | '/renovation/$id'
   id:
     | '__root__'
     | '/'
     | '/inspirations'
     | '/piece'
+    | '/renovations'
     | '/style'
     | '/upload'
     | '/api/generate-image'
     | '/inspiration/$id'
+    | '/renovation/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   InspirationsRoute: typeof InspirationsRoute
   PieceRoute: typeof PieceRoute
+  RenovationsRoute: typeof RenovationsRoute
   StyleRoute: typeof StyleRoute
   UploadRoute: typeof UploadRoute
   ApiGenerateImageRoute: typeof ApiGenerateImageRoute
   InspirationIdRoute: typeof InspirationIdRoute
+  RenovationIdRoute: typeof RenovationIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -142,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: '/piece'
       fullPath: '/piece'
       preLoaderRoute: typeof PieceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/renovations': {
+      id: '/renovations'
+      path: '/renovations'
+      fullPath: '/renovations'
+      preLoaderRoute: typeof RenovationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/style': {
@@ -172,6 +205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InspirationIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/renovation/$id': {
+      id: '/renovation/$id'
+      path: '/renovation/$id'
+      fullPath: '/renovation/$id'
+      preLoaderRoute: typeof RenovationIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -179,10 +219,12 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   InspirationsRoute: InspirationsRoute,
   PieceRoute: PieceRoute,
+  RenovationsRoute: RenovationsRoute,
   StyleRoute: StyleRoute,
   UploadRoute: UploadRoute,
   ApiGenerateImageRoute: ApiGenerateImageRoute,
   InspirationIdRoute: InspirationIdRoute,
+  RenovationIdRoute: RenovationIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
