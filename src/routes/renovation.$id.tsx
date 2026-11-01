@@ -13,15 +13,19 @@ export const Route = createFileRoute("/renovation/$id")({
   },
   head: ({ loaderData }) => ({
     meta: [
-      { title: `${loaderData.title} — RENOV IA` },
+      { title: `${loaderData?.title ?? "Projet de rénovation"} — RENOV IA` },
       {
         name: "description",
-        content: `Projet ${loaderData.title} au style ${loaderData.style}. Comparez avant et après.`,
+        content: loaderData
+          ? `Projet ${loaderData.title} au style ${loaderData.style}. Comparez avant et après.`
+          : "Découvrez les projets de rénovation avant et après avec RENOV IA.",
       },
-      { property: "og:title", content: `${loaderData.title} — RENOV IA` },
+      { property: "og:title", content: `${loaderData?.title ?? "Projet de rénovation"} — RENOV IA` },
       {
         property: "og:description",
-        content: `Projet ${loaderData.title} au style ${loaderData.style}. Comparez avant et après.`,
+        content: loaderData
+          ? `Projet ${loaderData.title} au style ${loaderData.style}. Comparez avant et après.`
+          : "Découvrez les projets de rénovation avant et après avec RENOV IA.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
