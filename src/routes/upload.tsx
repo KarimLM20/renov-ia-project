@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { ArrowLeft, ArrowRight, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 
@@ -19,7 +19,7 @@ import { StepIndicator } from "@/components/renov/StepIndicator";
 import { useRenovationFlow } from "@/hooks/useRenovationFlow";
 import { downloadImage } from "@/lib/image";
 
-const TITLE = "RENOV IA — Transformez votre intérieur grâce à l'IA";
+const TITLE = "Importer une photo et rénover votre pièce — RENOV IA";
 const DESCRIPTION =
   "Importez une photo de votre pièce et découvrez votre future décoration en quelques secondes, avec un comparateur avant / après.";
 
@@ -166,11 +166,12 @@ function Index() {
                     />
                     <div className="mt-8">
                       <ResultActions
-                        onDownload={() =>
-                          void downloadImage(flow.generatedUrl!, "renov-ia.jpg").catch(() =>
+                        onDownload={() => {
+                          if (!flow.generatedUrl) return;
+                          void downloadImage(flow.generatedUrl, "renov-ia.jpg").catch(() =>
                             toast.error("Téléchargement impossible"),
-                          )
-                        }
+                          );
+                        }}
                         onShare={handleShare}
                         onRegenerate={flow.generate}
                         onChangeStyle={() => flow.setStep("style")}
@@ -211,7 +212,7 @@ function NavRow({
   onNext: () => void;
   nextLabel: string;
   nextDisabled?: boolean;
-  nextIcon?: React.ReactNode;
+  nextIcon?: ReactNode;
 }) {
   return (
     <div className="mt-10 flex items-center justify-center gap-3">
